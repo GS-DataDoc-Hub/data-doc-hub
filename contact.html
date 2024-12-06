@@ -31,7 +31,16 @@
     <p></p>
 
     <!-- Contact Form -->
-    <form>
+    <form action="https://formspree.io/f/mldevvbk" method="POST">
+      <input type="hidden" name="_subject" value="New Form Submission">
+      <input type="hidden" name="_redirect" value="https://yourwebsite.com/thank-you.html">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+  </form>
+  
+    <form action="https://formspree.io/f/mldevvbk" method="POST">
        <p> <label for="name">Name:</label>
         <input type="text" id="name" name="name" placeholder="Your Full Name" required> <br> </p>
 
@@ -45,6 +54,24 @@
         <textarea id="message" name="message" placeholder="Your Message..." rows="5"></textarea> <br></p>
 
         <button type="submit">Send Message</button>
+
+        <script>
+          const form = document.querySelector("form");
+          form.addEventListener("submit", (e) => {
+              e.preventDefault();
+              fetch(form.action, {
+                  method: form.method,
+                  body: new FormData(form),
+                  headers: { 'Accept': 'application/json' }
+              }).then(response => {
+                  alert("Thank you! Your message has been sent.");
+                  form.reset();
+              }).catch(error => {
+                  alert("Oops! There was a problem submitting your form.");
+              });
+          });
+      </script>
+      
     </form>
 
     <!-- Contact Details -->
